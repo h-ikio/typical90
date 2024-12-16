@@ -19,8 +19,6 @@ func main() {
 	// スコアを満たしつつ K + 1 個以上に切り分けられるということは、スコアを満たしつつちょうど K + 1 個にすることも可能なので、"以上" であることを確認すれば十分
 	low, high := -1, L+1
 	score := (low + high) / 2
-	prevScore := -1
-	ret := -1
 
 	for {
 		partsNum := 0
@@ -35,17 +33,15 @@ func main() {
 			partsNum++
 		}
 
-		prevScore = score
 		if partsNum >= K+1 {
-			ret = score
 			low = score
 		} else {
 			high = score
 		}
 		score = (low + high) / 2
 
-		if prevScore == score {
-			fmt.Println(ret)
+		if high-low <= 1 {
+			fmt.Println(low)
 			break
 		}
 	}
